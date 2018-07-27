@@ -1,21 +1,21 @@
 export default {
-  repo: 'ETOP',
+  repo: 'ENCM',
   name: {
-    zh: 'ET 的開源遊樂場',
-    en: "ET's Open Playground"
+    zh: 'Energy Conflict Map',
+    en: 'Energy Conflict Map'
   },
   abbr: {
-    zh: 'ETOP',
-    en: 'ETOP'
+    zh: 'ENCM',
+    en: 'ENCM'
   },
   description: {
     zh: '',
-    en: 'Yet another open data experiment, taking my own works as subjects.'
+    en: 'A derivative work from https://etblue.github.io/ETOP/'
   },
   links: [
     {
       title: 'Source code',
-      url: 'https://github.com/ETBlue/etblue.github.io',
+      url: 'https://github.com/HJChiu/energyconflictmap',
       icon: 'github'
     },
     {
