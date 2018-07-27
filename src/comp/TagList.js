@@ -15,6 +15,8 @@ const sortTagByCount = ({tagArray, tagWorkMapper}) => {
 
 let depthCount = 0
 const TagList = ({categoryId, tagTree, depth, urlTagId, tagObj, tagWorkMapper, categoryObj}) => {
+  if (!categoryId || !tagTree || !depth || !urlTagId || !tagObj || !tagWorkMapper || !categoryObj) return null
+
   depthCount += 1
   const sortedTags = sortTagByCount({tagArray: Object.keys(tagTree), tagWorkMapper})
   const tagList = sortedTags.map((tagId, tagIdIndex) => {

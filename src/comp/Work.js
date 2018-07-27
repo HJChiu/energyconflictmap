@@ -6,6 +6,8 @@ import {
 import Navbar from './Navbar'
 
 export default ({params, categoryObj, tagObj, tagWorkMapper, workObj, tagCategory}) => {
+  if (!params || !categoryObj || !tagObj || !tagWorkMapper || !workObj || !tagCategory) return null
+
   const workId = params.workId
   const workItemData = workObj[workId]
   let parentWork = ''

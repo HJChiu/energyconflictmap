@@ -8,6 +8,8 @@ import MAIN_CATEGORY from '../const/MAIN_CATEGORY'
 import SITE_SETTING from '../const/SITE_SETTING'
 
 export default ({categoryObj}) => {
+  if (!categoryObj) return null
+
   const categoryNav = MAIN_CATEGORY.map((categoryId, categoryIdIndex) => (
     <NavLink to={`/${categoryId}`} className='item' key={`${categoryId}-${categoryIdIndex}`} >
       {categoryObj[categoryId].abbr}
