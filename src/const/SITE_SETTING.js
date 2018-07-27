@@ -1,5 +1,5 @@
 export default {
-  repo: 'ENCM',
+  repo: 'energyconflictmap',
   name: {
     zh: 'Energy Conflict Map',
     en: 'Energy Conflict Map'
