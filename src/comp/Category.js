@@ -6,15 +6,7 @@ import {
 import TagList from './TagList'
 import Navbar from './Navbar'
 
-import {
-  categoryObj,
-  tagObj,
-  tagWorkMapper,
-  workObj,
-  tagCategory
-} from '../func/data'
-
-const WorkList = ({categoryId, tagId}) => {
+const WorkList = ({categoryId, tagId, categoryObj, tagObj, tagWorkMapper, workObj, tagCategory}) => {
   if (!categoryId) {
     console.log(`category id required`)
     return null
@@ -76,14 +68,16 @@ const WorkList = ({categoryId, tagId}) => {
   )
 }
 
-export default (match) => {
-  const categoryId = match.params.categoryId
-  const tagId = match.params.tagId
-  const tagList = TagList({categoryId, tagTree: tagCategory[categoryId], depth: 5, urlTagId: tagId})
-  const workList = WorkList({categoryId, tagId})
+export default ({params, tagObj, tagWorkMapper, categoryObj, workObj, tagCategory}) => {
+  if (!tagObj || !tagWorkMapper || !categoryObj || !workObj || !tagCategory) return null
+
+  const categoryId = params.categoryId
+  const tagId = params.tagId
+  const tagList = TagList({categoryId, tagTree: tagCategory[categoryId], depth: 5, urlTagId: tagId, tagObj, tagWorkMapper, categoryObj})
+  const workList = WorkList({categoryId, tagId, categoryObj, tagObj, tagWorkMapper, workObj, tagCategory})
   return (
     <div className='Category App-main'>
-      <Navbar />
+      <Navbar categoryObj={categoryObj} />
       <section className='App-body'>
         <div className='ui container'>
           <div className='ui two column stackable grid'>

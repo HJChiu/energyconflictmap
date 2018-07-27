@@ -1,14 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import {
-  tagObj,
-  tagWorkMapper
-} from '../func/data'
-
-import CATEGORY_ICON from '../const/CATEGORY_ICON'
-
-const sortTagByCount = ({tagArray}) => {
+const sortTagByCount = ({tagArray, tagWorkMapper}) => {
   return tagArray.sort((tagA, tagB) => {
     if (tagWorkMapper[tagA] === undefined) {
       tagWorkMapper[tagA] = new Set()
@@ -21,13 +14,13 @@ const sortTagByCount = ({tagArray}) => {
 }
 
 let depthCount = 0
-const TagList = ({categoryId, tagTree, depth, urlTagId}) => {
+const TagList = ({categoryId, tagTree, depth, urlTagId, tagObj, tagWorkMapper, categoryObj}) => {
   depthCount += 1
-  const sortedTags = sortTagByCount({tagArray: Object.keys(tagTree)})
+  const sortedTags = sortTagByCount({tagArray: Object.keys(tagTree), tagWorkMapper})
   const tagList = sortedTags.map((tagId, tagIdIndex) => {
     let subTags = null
     if (depthCount < depth) {
-      const subTagList = TagList({categoryId, tagTree: tagTree[tagId], depth, urlTagId})
+      const subTagList = TagList({categoryId, tagTree: tagTree[tagId], depth, urlTagId, tagObj, tagWorkMapper, categoryObj})
       subTags = subTagList
     }
     const count = tagWorkMapper[tagId].size
@@ -50,7 +43,7 @@ const TagList = ({categoryId, tagTree, depth, urlTagId}) => {
     )
     return (
       <div className='item' key={`${tagId}-${tagIdIndex}`}>
-        <i className={`${CATEGORY_ICON[categoryId]} ${state} icon`} />
+        <i className={`${categoryObj[categoryId].icon} ${state} icon`} />
         <div className='content'>
           <Link to={`/${categoryId}/${tagId}`} className={`${state} header`}>
             <span className={`${state} tag-count ui horizontal ${size} label`}>

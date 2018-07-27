@@ -1,10 +1,24 @@
 import date2range from './date2range'
 
-export default ({csv, tagWorkMapper = null, workTagSet = null, tagSetByCategory = null}) => {
-  if (!csv || csv.length === 0 || typeof csv !== 'object') {
-    return {}
-  }
+export default ({csvString, tagWorkMapper = null, workTagSet = null, tagSetByCategory = null}) => {
+  if (!csvString || csvString.length === 0 || typeof csvString !== 'string') return {}
+
   let result = {}
+  const csv = csvString.split('\n').map((line) => {
+    let quoted = false
+    let parsedLine = ''
+    for (let char of line) {
+      if (char === '"') {
+        quoted = !quoted
+      }
+      if (!quoted && char === ',') {
+        parsedLine += '\n'
+      } else {
+        parsedLine += char
+      }
+    }
+    return parsedLine.split('\n').map((cell) => cell.trim().replace(/"/g, ''))
+  })
   const titles = csv[0]
   for (let i = 1; i < csv.length; i++) {
     const lineArray = csv[i]

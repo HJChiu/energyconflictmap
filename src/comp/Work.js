@@ -5,16 +5,8 @@ import {
 
 import Navbar from './Navbar'
 
-import {
-  categoryObj,
-  tagObj,
-  tagWorkMapper,
-  workObj,
-  tagCategory
-} from '../func/data'
-
-export default (match) => {
-  const workId = match.params.workId
+export default ({params, categoryObj, tagObj, tagWorkMapper, workObj, tagCategory}) => {
+  const workId = params.workId
   const workItemData = workObj[workId]
   let parentWork = ''
   if (workItemData.parent_id.length > 0) {
@@ -57,7 +49,7 @@ export default (match) => {
   })
   return (
     <div className='Work App-main'>
-      <Navbar />
+      <Navbar categoryObj={categoryObj} />
       <section className='App-body'>
         <div className='ui center aligned container'>
           <h2 className='ui icon header'>
